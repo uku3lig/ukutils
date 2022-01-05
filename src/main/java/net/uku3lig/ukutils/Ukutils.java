@@ -11,15 +11,15 @@ import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 public final class Ukutils extends JavaPlugin {
-    private static final String UKUTILS = ChatColor.GRAY + "[" + ChatColor.DARK_AQUA +
+    private static final String UKUTILS_PREFIX = ChatColor.GRAY + "[" + ChatColor.DARK_AQUA +
             "ukutils" + ChatColor.GRAY + "]" + ChatColor.RESET;
     private static final Pattern QUOTE_PATTERN = Pattern.compile("[\"'][^\"']++[\"']|[^\\s]+");
 
     @Override
     public void onEnable() {
         Bukkit.getLogger().info("ukutils started");
-        getCommand("color").setExecutor(new ColorCommand());
-        getCommand("title").setExecutor(new TitleCommand());
+        Objects.requireNonNull(getCommand("color")).setExecutor(new ColorCommand());
+        Objects.requireNonNull(getCommand("title")).setExecutor(new TitleCommand());
     }
 
     @Override
