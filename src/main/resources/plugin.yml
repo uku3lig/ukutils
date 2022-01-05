@@ -18,6 +18,14 @@ commands:
     description: Spawns a boat
     usage: /boat
     permission: ukutils.boat
+  nether:
+    description: Sends you to the nether
+    usage: /nether
+    permission: ukutils.nether
+  end:
+    description: Sends you to the end
+    usage: /end
+    permission: ukutils.end
 permissions:
   ukutils.color.rgb:
     description: allows use of rgb color codes

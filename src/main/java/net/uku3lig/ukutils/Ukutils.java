@@ -2,6 +2,7 @@ package net.uku3lig.ukutils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,6 +22,8 @@ public final class Ukutils extends JavaPlugin {
         Objects.requireNonNull(getCommand("color")).setExecutor(new ColorCommand());
         Objects.requireNonNull(getCommand("title")).setExecutor(new TitleCommand());
         Objects.requireNonNull(getCommand("boat")).setExecutor(new BoatCommand());
+        Objects.requireNonNull(getCommand("nether")).setExecutor(new NetherCommand());
+        Objects.requireNonNull(getCommand("end")).setExecutor(new EndCommand());
     }
 
     @Override
@@ -38,5 +41,11 @@ public final class Ukutils extends JavaPlugin {
                 .map(MatchResult::group)
                 .map(s -> s.replace("\"", ""))
                 .toList();
+    }
+
+    public static Location toMiddle(Location loc) {
+        double x = loc.getX() + 0.5;
+        double z = loc.getZ() + 0.5;
+        return new Location(loc.getWorld(), x, loc.getY(), z, loc.getYaw(), loc.getPitch());
     }
 }
