@@ -14,6 +14,10 @@ commands:
     description: Give yourself a title (max 15 chars)
     usage: /title [user] <text>
     permission: ukutils.title
+  boat:
+    description: Spawns a boat
+    usage: /boat
+    permission: ukutils.boat
 permissions:
   ukutils.color.rgb:
     description: allows use of rgb color codes

@@ -20,6 +20,7 @@ public final class Ukutils extends JavaPlugin {
         Bukkit.getLogger().info("ukutils started");
         Objects.requireNonNull(getCommand("color")).setExecutor(new ColorCommand());
         Objects.requireNonNull(getCommand("title")).setExecutor(new TitleCommand());
+        Objects.requireNonNull(getCommand("boat")).setExecutor(new BoatCommand());
     }
 
     @Override
