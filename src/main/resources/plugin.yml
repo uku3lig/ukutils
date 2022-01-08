@@ -31,6 +31,11 @@ commands:
     description: Toggles tree feller
     usage: /toggletimber
     permission: ukutils.toggletimber
+  enderchest:
+    aliases: [ ec ]
+    description: Opens your enderchest
+    usage: /enderchest [player]
+    permission: ukutils.ec
 permissions:
   ukutils.color.rgb:
     description: allows use of rgb color codes
@@ -40,3 +45,5 @@ permissions:
     description: allows for a longer title (20 chars)
   ukutils.title.others:
     description: allows to change others' title
+  ukutils.ec.others:
+    description: allows you to see others' enderchests
