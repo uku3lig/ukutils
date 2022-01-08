@@ -16,8 +16,12 @@ public class NetherCommand implements CommandExecutor {
                     .filter(w -> w.getEnvironment().equals(World.Environment.NETHER))
                     .findFirst()
                     .ifPresentOrElse(world -> {
-                        player.teleport(Ukutils.toMiddle(world.getSpawnLocation()));
-                        Ukutils.sendMessage(sender, "Successfully teleported you to the nether.");
+                        if (!player.getAdvancementProgress(Ukutils.getAdvancement("nether/root")).isDone())
+                            Ukutils.sendMessage(sender, ChatColor.RED + "Error: you have to visit the nether first!");
+                        else {
+                            player.teleport(Ukutils.toMiddle(world.getSpawnLocation()));
+                            Ukutils.sendMessage(sender, "Successfully teleported you to the nether.");
+                        }
                     }, () -> Ukutils.sendMessage(sender, ChatColor.RED + "Error: could not find nether."));
         } else Ukutils.sendMessage(sender, ChatColor.RED + "Error: you're not a player.");
         return true;

@@ -16,8 +16,12 @@ public class EndCommand implements CommandExecutor {
                     .filter(w -> w.getEnvironment().equals(World.Environment.THE_END))
                     .findFirst()
                     .ifPresentOrElse(world -> {
-                        player.teleport(Ukutils.toMiddle(world.getSpawnLocation()));
-                        Ukutils.sendMessage(sender, "Successfully teleported you to the end.");
+                        if (!player.getAdvancementProgress(Ukutils.getAdvancement("end/root")).isDone())
+                            Ukutils.sendMessage(sender, ChatColor.RED + "Error: you have to visit the end first!");
+                        else {
+                            player.teleport(Ukutils.toMiddle(world.getSpawnLocation()));
+                            Ukutils.sendMessage(sender, "Successfully teleported you to the end.");
+                        }
                     }, () -> Ukutils.sendMessage(sender, ChatColor.RED + "Error: could not find the end."));
         } else Ukutils.sendMessage(sender, ChatColor.RED + "Error: you're not a player.");
         return true;
