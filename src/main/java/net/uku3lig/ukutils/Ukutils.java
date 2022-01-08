@@ -3,9 +3,11 @@ package net.uku3lig.ukutils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.MatchResult;
@@ -49,5 +51,14 @@ public final class Ukutils extends JavaPlugin {
         double x = loc.getX() + 0.5;
         double z = loc.getZ() + 0.5;
         return new Location(loc.getWorld(), x, loc.getY(), z, loc.getYaw(), loc.getPitch());
+    }
+
+    public static Advancement getAdvancement(String name) {
+        Iterator<Advancement> it = Bukkit.getServer().advancementIterator();
+        while (it.hasNext()) {
+            Advancement next = it.next();
+            if (next.getKey().getKey().equalsIgnoreCase(name)) return next;
+        }
+        throw new IllegalArgumentException("could not find this advancement");
     }
 }
