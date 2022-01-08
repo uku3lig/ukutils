@@ -26,6 +26,11 @@ commands:
     description: Sends you to the end
     usage: /end
     permission: ukutils.end
+  toggletimber:
+    aliases: [ toggletreefeller ]
+    description: Toggles tree feller
+    usage: /toggletimber
+    permission: ukutils.toggletimber
 permissions:
   ukutils.color.rgb:
     description: allows use of rgb color codes

@@ -24,6 +24,7 @@ public final class Ukutils extends JavaPlugin {
         Objects.requireNonNull(getCommand("boat")).setExecutor(new BoatCommand());
         Objects.requireNonNull(getCommand("nether")).setExecutor(new NetherCommand());
         Objects.requireNonNull(getCommand("end")).setExecutor(new EndCommand());
+        Objects.requireNonNull(getCommand("toggletimber")).setExecutor(new TimberCommand());
     }
 
     @Override
