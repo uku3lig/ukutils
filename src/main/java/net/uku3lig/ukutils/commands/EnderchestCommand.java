@@ -1,5 +1,6 @@
-package net.uku3lig.ukutils;
+package net.uku3lig.ukutils.commands;
 
+import net.uku3lig.ukutils.Ukutils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

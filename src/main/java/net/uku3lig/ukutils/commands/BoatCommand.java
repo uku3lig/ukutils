@@ -1,5 +1,6 @@
-package net.uku3lig.ukutils;
+package net.uku3lig.ukutils.commands;
 
+import net.uku3lig.ukutils.Ukutils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
