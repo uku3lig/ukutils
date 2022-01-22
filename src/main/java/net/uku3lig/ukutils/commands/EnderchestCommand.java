@@ -27,7 +27,8 @@ public class EnderchestCommand implements CommandExecutor {
             return;
         }
 
-        if (sender == player && player.getStatistic(Statistic.CRAFT_ITEM, Material.ENDER_CHEST) == 0) {
+        if ((sender.equals(player) && player.getStatistic(Statistic.CRAFT_ITEM, Material.ENDER_CHEST) == 0) ||
+                (!sender.equals(player) && !sender.hasPermission("ukutils.ec.others"))) {
             Ukutils.sendMessage(sender, ChatColor.RED + "You must craft an enderchest before using this command!");
             return;
         }
