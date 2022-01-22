@@ -43,7 +43,8 @@ public class TitleCommand implements CommandExecutor {
     }
 
     private void changeTitle(CommandSender sender, Player target, String title) {
-        int maxLength = Math.min(title.length(), target.hasPermission("ukutils.title.longer") ? 20 : 15);
+        int maxLength = Math.min(title.length(), Ukutils.getInstance().getConfig().getInt("title." +
+                (target.hasPermission("ukutils.title.longer") ? "longer-length" : "base-length")));
         if (title.replaceAll(COLOR_PATTERN, "").length() > maxLength)
             Ukutils.sendMessage(sender, ChatColor.RED + "Error: the title cannot be longer than " +
                     maxLength + " characters! (excluding color codes)");

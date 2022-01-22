@@ -47,3 +47,5 @@ permissions:
     description: allows to change others' title
   ukutils.ec.others:
     description: allows you to see others' enderchests
+  ukutils.elytra:
+    description: allows you to renew elytras

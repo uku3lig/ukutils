@@ -1,5 +1,8 @@
 package net.uku3lig.ukutils;
 
+import lombok.Getter;
+import net.uku3lig.ukutils.commands.*;
+import net.uku3lig.ukutils.listeners.RenewableElytraListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -18,9 +21,14 @@ public final class Ukutils extends JavaPlugin {
             "ukutils" + ChatColor.GRAY + "]" + ChatColor.RESET;
     private static final Pattern QUOTE_PATTERN = Pattern.compile("[\"'][^\"']++[\"']|[^\\s]+");
 
+    @Getter
+    private static Ukutils instance;
+
     @Override
     public void onEnable() {
         Bukkit.getLogger().info("ukutils started");
+        saveDefaultConfig();
+
         Objects.requireNonNull(getCommand("color")).setExecutor(new ColorCommand());
         Objects.requireNonNull(getCommand("title")).setExecutor(new TitleCommand());
         Objects.requireNonNull(getCommand("boat")).setExecutor(new BoatCommand());
@@ -28,6 +36,10 @@ public final class Ukutils extends JavaPlugin {
         Objects.requireNonNull(getCommand("end")).setExecutor(new EndCommand());
         Objects.requireNonNull(getCommand("toggletimber")).setExecutor(new TimberCommand());
         Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCommand());
+
+        getServer().getPluginManager().registerEvents(new RenewableElytraListener(), this);
+
+        instance = this;
     }
 
     @Override
