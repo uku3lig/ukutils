@@ -36,6 +36,10 @@ commands:
     description: Opens your enderchest
     usage: /enderchest [player]
     permission: ukutils.ec
+  killboats:
+    description: Kills all empty boats
+    usage: /killboats
+    permission: ukutils.killboats
 permissions:
   ukutils.color.rgb:
     description: allows use of rgb color codes
