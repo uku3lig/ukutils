@@ -1,7 +1,8 @@
 package net.uku3lig.ukutils;
 
-import lombok.Getter;
+import litebans.api.Events;
 import net.uku3lig.ukutils.commands.*;
+import net.uku3lig.ukutils.listeners.LitebansListener;
 import net.uku3lig.ukutils.listeners.RenewableElytraListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,16 +22,13 @@ public final class Ukutils extends JavaPlugin {
             "ukutils" + ChatColor.GRAY + "]" + ChatColor.RESET;
     private static final Pattern QUOTE_PATTERN = Pattern.compile("[\"'][^\"']++[\"']|[^\\s]+");
 
-    @Getter
-    private static Ukutils instance;
-
     @Override
     public void onEnable() {
         Bukkit.getLogger().info("ukutils started");
         saveDefaultConfig();
 
         Objects.requireNonNull(getCommand("color")).setExecutor(new ColorCommand());
-        Objects.requireNonNull(getCommand("title")).setExecutor(new TitleCommand());
+        Objects.requireNonNull(getCommand("title")).setExecutor(new TitleCommand(this));
         Objects.requireNonNull(getCommand("boat")).setExecutor(new BoatCommand());
         Objects.requireNonNull(getCommand("nether")).setExecutor(new NetherCommand());
         Objects.requireNonNull(getCommand("end")).setExecutor(new EndCommand());
@@ -38,9 +36,8 @@ public final class Ukutils extends JavaPlugin {
         Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCommand());
         Objects.requireNonNull(getCommand("killboats")).setExecutor(new KillBoatsCommand());
 
-        getServer().getPluginManager().registerEvents(new RenewableElytraListener(), this);
-
-        instance = this;
+        getServer().getPluginManager().registerEvents(new RenewableElytraListener(this), this);
+        Events.get().register(new LitebansListener(this));
     }
 
     @Override

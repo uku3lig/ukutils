@@ -3,3 +3,11 @@ title:
   longer-length: 20
 
 elytra-drop-chance: 0.02
+  
+bans-broadcast:
+  channel: bans-mutes-test
+  allowed:
+    - muted
+    - warned
+    - warned.offline
+    - broadcast

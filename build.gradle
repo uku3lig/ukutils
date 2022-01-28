@@ -16,10 +16,16 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven {
+        name = 'jitpack'
+        url = 'https://jitpack.io'
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    implementation 'com.gitlab.ruany:LitebansAPI:0.3.5'
+    implementation 'org.jetbrains:annotations:22.0.0'
 }
 
 def targetJavaVersion = 16

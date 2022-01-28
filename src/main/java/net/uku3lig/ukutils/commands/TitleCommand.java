@@ -7,16 +7,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class TitleCommand implements CommandExecutor {
+public record TitleCommand(JavaPlugin plugin) implements CommandExecutor {
     private static final String TITLE_FORMAT = "lp user %s meta setprefix 1000 \"&r[%s&r]\"";
     private static final String REMOVE_TITLE_FORMAT = "lp user %s meta removeprefix 1000";
     private static final String COLOR_PATTERN = "&?#[a-f0-9]{6}|&[a-f0-9]";
 
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         List<String> arguments = Ukutils.parseArgs(args);
         System.out.println(arguments);
         if (sender instanceof Player player && arguments.size() < 2) {
@@ -43,7 +46,7 @@ public class TitleCommand implements CommandExecutor {
     }
 
     private void changeTitle(CommandSender sender, Player target, String title) {
-        int maxLength = Math.min(title.length(), Ukutils.getInstance().getConfig().getInt("title." +
+        int maxLength = Math.min(title.length(), plugin.getConfig().getInt("title." +
                 (target.hasPermission("ukutils.title.longer") ? "longer-length" : "base-length")));
         if (title.replaceAll(COLOR_PATTERN, "").length() > maxLength)
             Ukutils.sendMessage(sender, ChatColor.RED + "Error: the title cannot be longer than " +
