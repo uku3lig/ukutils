@@ -35,6 +35,7 @@ public final class Ukutils extends JavaPlugin {
         Objects.requireNonNull(getCommand("toggletimber")).setExecutor(new TimberCommand());
         Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCommand());
         Objects.requireNonNull(getCommand("killboats")).setExecutor(new KillBoatsCommand());
+        Objects.requireNonNull(getCommand("shrug")).setExecutor(new ShrugCommand());
 
         getServer().getPluginManager().registerEvents(new RenewableElytraListener(this), this);
         Events.get().register(new LitebansListener(this));

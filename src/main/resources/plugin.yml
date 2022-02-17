@@ -40,6 +40,10 @@ commands:
     description: Kills all empty boats
     usage: /killboats
     permission: ukutils.killboats
+  shrug:
+    description: ¯\_(ツ)_/¯
+    usage: /shrug
+    permission: ukutils.shrug
 permissions:
   ukutils.color.rgb:
     description: allows use of rgb color codes
