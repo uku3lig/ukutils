@@ -41,7 +41,7 @@ commands:
     usage: /killboats
     permission: ukutils.killboats
   shrug:
-    description: ¯\_(ツ)_/¯
+    description: shrugging
     usage: /shrug
     permission: ukutils.shrug
 permissions:
