@@ -2,6 +2,10 @@ title:
   base-length: 15
   longer-length: 20
 
+bio:
+  base-length: 15
+  longer-length: 20
+
 elytra-drop-chance: 0.02
   
 bans-broadcast:
