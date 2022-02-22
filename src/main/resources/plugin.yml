@@ -14,6 +14,10 @@ commands:
     description: Give yourself a title (max 15 chars)
     usage: /title [user] <text>
     permission: ukutils.title
+  bio:
+    description: Give yourself a title (max 15 chars)
+    usage: /bio [user] <text>
+    permission: ukutils.bio
   boat:
     description: Spawns a boat
     usage: /boat
@@ -53,6 +57,10 @@ permissions:
     description: allows for a longer title (20 chars)
   ukutils.title.others:
     description: allows to change others' title
+  ukutils.bio.longer:
+    description: allows for a longer bio (20 chars)
+    ukutils.bio.others:
+      description: allows to change others' bio
   ukutils.ec.others:
     description: allows you to see others' enderchests
   ukutils.elytra:
