@@ -15,8 +15,7 @@ import java.util.List;
 public record TitleCommand(JavaPlugin plugin) implements CommandExecutor {
     private static final String TITLE_FORMAT = "lp user %s meta setprefix 1000 \"&r[%s&r]\"";
     private static final String REMOVE_TITLE_FORMAT = "lp user %s meta removeprefix 1000";
-    private static final String COLOR_PATTERN = "&?#[a-f0-9]{6}|&[a-f0-9]";
-
+    private static final String COLOR_PATTERN = "&?#[a-fA-F0-9]{6}|&[a-f0-9k-or]";
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {

@@ -7,14 +7,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class ColorCommand implements CommandExecutor {
     private static final String COLORS = "[0-9a-f]";
-    private static final String RGB_COLOR = "#[0-9a-f]{6}";
+    private static final String RGB_COLOR = "#[0-9a-fA-F]{6}";
     private static final String COMMAND_FORMAT = "nick %s &%s%1$s";
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender instanceof Player player && args.length < 2) {
             if (args.length == 0) resetNick(sender, player);
             else { // reset nick for player or give color
