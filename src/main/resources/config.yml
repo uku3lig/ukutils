@@ -2,7 +2,7 @@ title:
   base-length: 15
   longer-length: 20
 
-elytra-drop-chance: 0.02
+elytra-drop-chance: 0.2
   
 bans-broadcast:
   channel: bans-mutes-test
@@ -11,3 +11,5 @@ bans-broadcast:
     - warned
     - warned.offline
     - broadcast
+
+disable-chorus-tp: true

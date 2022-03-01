@@ -2,6 +2,7 @@ package net.uku3lig.ukutils;
 
 import litebans.api.Events;
 import net.uku3lig.ukutils.commands.*;
+import net.uku3lig.ukutils.listeners.ChorusListener;
 import net.uku3lig.ukutils.listeners.LitebansListener;
 import net.uku3lig.ukutils.listeners.RenewableElytraListener;
 import org.bukkit.Bukkit;
@@ -38,6 +39,7 @@ public final class Ukutils extends JavaPlugin {
         Objects.requireNonNull(getCommand("shrug")).setExecutor(new ShrugCommand());
 
         getServer().getPluginManager().registerEvents(new RenewableElytraListener(this), this);
+        getServer().getPluginManager().registerEvents(new ChorusListener(this), this);
         Events.get().register(new LitebansListener(this));
     }
 
