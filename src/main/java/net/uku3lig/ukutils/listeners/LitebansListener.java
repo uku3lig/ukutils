@@ -17,6 +17,10 @@ public class LitebansListener extends Events.Listener {
         this.plugin = plugin;
     }
 
+    public static void register(JavaPlugin plugin) {
+        Events.get().register(new LitebansListener(plugin));
+    }
+
     @Override
     public void broadcastSent(@NotNull String message, @Nullable String type) {
         List<String> allowed = plugin.getConfig().getStringList("bans-broadcast.allowed");
