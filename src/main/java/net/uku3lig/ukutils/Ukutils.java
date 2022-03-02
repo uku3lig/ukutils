@@ -35,6 +35,13 @@ public final class Ukutils extends JavaPlugin {
         Bukkit.getLogger().info("ukutils started");
         saveDefaultConfig();
 
+        try {
+            new ConfigConverter(this).updateConfig();
+        } catch (IOException e) {
+            Bukkit.getLogger().severe("Error: could not update ukutils config");
+            e.printStackTrace();
+        }
+
         Objects.requireNonNull(getCommand("color")).setExecutor(new ColorCommand());
         Objects.requireNonNull(getCommand("title")).setExecutor(new TitleCommand(this));
         Objects.requireNonNull(getCommand("boat")).setExecutor(new BoatCommand());
