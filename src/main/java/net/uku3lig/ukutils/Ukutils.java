@@ -23,6 +23,9 @@ public final class Ukutils extends JavaPlugin {
             "ukutils" + ChatColor.GRAY + "]" + ChatColor.RESET;
     private static final Pattern QUOTE_PATTERN = Pattern.compile("[\"'][^\"']++[\"']|[^\\s]+");
 
+    @Getter
+    private final Database database = new Database(this);
+
     @Override
     public void onEnable() {
         Bukkit.getLogger().info("ukutils started");
@@ -37,10 +40,17 @@ public final class Ukutils extends JavaPlugin {
         Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCommand());
         Objects.requireNonNull(getCommand("killboats")).setExecutor(new KillBoatsCommand());
         Objects.requireNonNull(getCommand("shrug")).setExecutor(new ShrugCommand());
+        Objects.requireNonNull(getCommand("togglephantoms")).setExecutor(new TogglePhantomsCommand(this));
 
         getServer().getPluginManager().registerEvents(new RenewableElytraListener(this), this);
         getServer().getPluginManager().registerEvents(new ChorusListener(this), this);
-        Events.get().register(new LitebansListener(this));
+
+        if (Bukkit.getPluginManager().isPluginEnabled("LiteBans")) {
+            LitebansListener.register(this);
+        }
+
+        // 1200 ticks = 20 * 60 = 1 irl minute
+        new StatResetTask(this).runTaskTimerAsynchronously(this, 0, 1200);
     }
 
     @Override

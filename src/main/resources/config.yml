@@ -5,7 +5,7 @@ title:
 elytra-drop-chance: 0.2
   
 bans-broadcast:
-  channel: bans-mutes-test
+  channel: bans-mutes
   allowed:
     - muted
     - warned
@@ -13,3 +13,8 @@ bans-broadcast:
     - broadcast
 
 disable-chorus-tp: true
+
+phantoms-disabled-by-default: true
+
+# DO NOT CHANGE THIS OR THE PLUGIN WILL BREAK
+config-version: 1

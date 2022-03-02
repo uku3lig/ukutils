@@ -92,3 +92,7 @@ permissions:
     default: true
   ukutils.elytra:
     description: allows you to renew elytras
+    default: true
+  ukutils.togglephantoms:
+    description: allows you to toggle phantoms
+    default: true
