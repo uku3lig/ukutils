@@ -15,7 +15,7 @@ import java.util.List;
 public record BioCommand(JavaPlugin plugin) implements CommandExecutor {
     private static final String BIO_FORMAT = "lp user %s meta setsuffix 1000 \"%s\"";
     private static final String REMOVE_BIO_FORMAT = "lp user %s meta removesuffix 1000";
-    private static final String COLOR_PATTERN = "&?#[a-f0-9]{6}|&[a-f0-9]";
+    private static final String COLOR_PATTERN = "&?#[a-fA-F0-9]{6}|&[a-f0-9k-or]";
 
 
     @Override
