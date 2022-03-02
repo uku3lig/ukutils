@@ -57,10 +57,15 @@ permissions:
     description: allows for a longer title (20 chars)
   ukutils.title.others:
     description: allows to change others' title
+  ukutils.bio:
+    description: allows you to set a bio
+    default: true
   ukutils.bio.longer:
     description: allows for a longer bio (20 chars)
-    ukutils.bio.others:
-      description: allows to change others' bio
+    default: true
+  ukutils.bio.others:
+    description: allows to change others' bio
+    default: op
   ukutils.ec.others:
     description: allows you to see others' enderchests
   ukutils.elytra:
