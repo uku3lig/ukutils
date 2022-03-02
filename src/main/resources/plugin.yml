@@ -2,7 +2,7 @@ name: Ukutils
 version: '${version}'
 main: net.uku3lig.ukutils.Ukutils
 api-version: 1.17
-depend: [ LuckPerms, VentureChat, LiteBans ]
+softdepend: [ LuckPerms, VentureChat, LiteBans, UltimateTimber ]
 authors: [ uku ]
 description: a few utility commands
 commands:
