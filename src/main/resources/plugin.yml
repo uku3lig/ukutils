@@ -44,16 +44,51 @@ commands:
     description: shrugging
     usage: /shrug
     permission: ukutils.shrug
+  togglephantoms:
+    description: toggles phantoms for the player
+    usage: /togglephantoms
+    permission: ukutils.togglephantoms
 permissions:
+  ukutils.color:
+    description: allows you to change your username color
+    default: true
   ukutils.color.rgb:
     description: allows use of rgb color codes
+    default: true
   ukutils.color.others:
     description: allow to change other users' colors
+    default: op
+  ukutils.title:
+    description: allows you to add a title before your username
+    default: true
   ukutils.title.longer:
-    description: allows for a longer title (20 chars)
+    description: allows for a longer title
+    default: true
   ukutils.title.others:
     description: allows to change others' title
+    default: op
+  ukutils.boat:
+    description: allows you to spawn a boat
+    default: true
+  ukutils.nether:
+    description: allows you to tp to the nether
+    default: op
+  ukutils.end:
+    description: allows you to tp to the end
+    default: op
+  ukutils.toggletimber:
+    description: allows you to toggle UltimateTimber
+  ukutils.ec:
+    description: allows you to access your enderchest
+    default: true
   ukutils.ec.others:
     description: allows you to see others' enderchests
+    default: op
+  ukutils.killboats:
+    description: allows you to kill all empty boats
+    default: op
+  ukutils.shrug:
+    description: ":shrug:"
+    default: true
   ukutils.elytra:
     description: allows you to renew elytras
