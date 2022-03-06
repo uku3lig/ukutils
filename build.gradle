@@ -29,6 +29,7 @@ dependencies {
     compileOnly 'org.jetbrains:annotations:22.0.0'
 
     implementation 'org.reflections:reflections:0.10.2'
+    implementation 'net.dv8tion:JDA:5.0.0-alpha.9'
 }
 
 def targetJavaVersion = 16
