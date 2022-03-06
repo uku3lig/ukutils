@@ -1,5 +1,6 @@
 package net.uku3lig.ukutils.config;
 
+import net.uku3lig.ukutils.config.mappings.OneToTwoMapping;
 import net.uku3lig.ukutils.config.mappings.ZeroToOneMapping;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,7 +15,8 @@ import java.util.Objects;
 
 public record ConfigConverter(JavaPlugin plugin) {
     private static final List<Mapping> mappings = List.of(
-            new ZeroToOneMapping()
+            new ZeroToOneMapping(),
+            new OneToTwoMapping()
     );
 
     public int getConfigVersion(FileConfiguration config) {
