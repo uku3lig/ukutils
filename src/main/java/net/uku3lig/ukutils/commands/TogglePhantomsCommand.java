@@ -5,16 +5,24 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Statistic;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
 
-public record TogglePhantomsCommand(Ukutils plugin) implements CommandExecutor {
+public class TogglePhantomsCommand extends UkutilsCommand {
+    public TogglePhantomsCommand(Ukutils plugin) {
+        super(plugin);
+    }
+
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public String command() {
+        return "togglephantoms";
+    }
+
+    @Override
+    public void onCommandReceived(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         try {
             if (sender instanceof Player player) {
                 boolean newState = plugin.getDatabase().togglePhantom(player.getUniqueId());
@@ -27,6 +35,5 @@ public record TogglePhantomsCommand(Ukutils plugin) implements CommandExecutor {
             Bukkit.getLogger().warning("[ukutils] Error: could not execute SQL statement");
             e.printStackTrace();
         }
-        return true;
     }
 }

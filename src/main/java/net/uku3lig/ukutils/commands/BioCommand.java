@@ -4,39 +4,48 @@ import net.uku3lig.ukutils.Ukutils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
 
-public record BioCommand(JavaPlugin plugin) implements CommandExecutor {
+public class BioCommand extends UkutilsCommand {
     private static final String BIO_FORMAT = "lp user %s meta setsuffix 1000 \"%s\"";
     private static final String REMOVE_BIO_FORMAT = "lp user %s meta removesuffix 1000";
     private static final String COLOR_PATTERN = "&?#[a-fA-F0-9]{6}|&[a-f0-9k-or]";
 
+    public BioCommand(Ukutils plugin) {
+        super(plugin);
+    }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        List<String> arguments = Ukutils.parseArgs(args);
-        System.out.println(arguments);
-        if (sender instanceof Player player && arguments.size() < 2) {
-            if (arguments.isEmpty()) resetBio(sender, player);
+    public String command() {
+        return "bio";
+    }
+
+    @Override
+    public Set<String> depends() {
+        return Collections.singleton("LuckPerms");
+    }
+
+    @Override
+    public void onCommandReceived(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (sender instanceof Player player && args.length < 2) {
+            if (args.length == 0) resetBio(sender, player);
             else {
-                Player target = Bukkit.getPlayerExact(arguments.get(0));
+                Player target = Bukkit.getPlayerExact(args[0]);
                 if (target != null && sender.hasPermission("ukutils.bio.others")) resetBio(sender, target);
-                else changeBio(sender, player, arguments.get(0));
+                else changeBio(sender, player, args[0]);
             }
         } else {
-            Player target = Bukkit.getPlayerExact(arguments.get(0));
+            Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null) Ukutils.sendMessage(sender, ChatColor.RED + "Error: cannot find that player");
             else if (!sender.hasPermission("ukutils.bio.others"))
                 Ukutils.sendMessage(sender, ChatColor.RED + "Error: cannot change this person's bio");
-            else changeBio(sender, target, arguments.get(1));
+            else changeBio(sender, target, args[0]);
         }
-        return true;
     }
 
     private void resetBio(CommandSender sender, Player target) {

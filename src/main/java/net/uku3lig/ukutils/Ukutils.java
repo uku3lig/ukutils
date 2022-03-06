@@ -1,24 +1,26 @@
 package net.uku3lig.ukutils;
 
 import lombok.Getter;
-import net.uku3lig.ukutils.commands.*;
+import net.uku3lig.ukutils.commands.DisabledCommand;
+import net.uku3lig.ukutils.commands.UkutilsCommand;
 import net.uku3lig.ukutils.config.ConfigConverter;
 import net.uku3lig.ukutils.listeners.ChorusListener;
 import net.uku3lig.ukutils.listeners.LitebansListener;
 import net.uku3lig.ukutils.listeners.RenewableElytraListener;
 import net.uku3lig.ukutils.util.Database;
+import net.uku3lig.ukutils.util.ReflectionsUtil;
 import net.uku3lig.ukutils.util.StatResetTask;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
@@ -42,17 +44,14 @@ public final class Ukutils extends JavaPlugin {
             e.printStackTrace();
         }
 
-        Objects.requireNonNull(getCommand("color")).setExecutor(new ColorCommand());
-        Objects.requireNonNull(getCommand("title")).setExecutor(new TitleCommand(this));
-        Objects.requireNonNull(getCommand("bio")).setExecutor(new BioCommand(this));
-        Objects.requireNonNull(getCommand("boat")).setExecutor(new BoatCommand());
-        Objects.requireNonNull(getCommand("nether")).setExecutor(new NetherCommand());
-        Objects.requireNonNull(getCommand("end")).setExecutor(new EndCommand());
-        Objects.requireNonNull(getCommand("toggletimber")).setExecutor(new TimberCommand());
-        Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCommand());
-        Objects.requireNonNull(getCommand("killboats")).setExecutor(new KillBoatsCommand());
-        Objects.requireNonNull(getCommand("shrug")).setExecutor(new ShrugCommand());
-        Objects.requireNonNull(getCommand("togglephantoms")).setExecutor(new TogglePhantomsCommand(this));
+        for (UkutilsCommand command : ReflectionsUtil.getCommands(this)) {
+            PluginCommand pluginCommand = getCommand(command.command());
+            if (pluginCommand == null) {
+                Bukkit.getLogger().severe("command " + command.command() + " is not registered in plugin.yml!!!");
+            } else if (!command.depends().stream().allMatch(d -> Bukkit.getPluginManager().isPluginEnabled(d))) {
+                pluginCommand.setExecutor(new DisabledCommand(command.depends()));
+            } else pluginCommand.setExecutor(command);
+        }
 
         getServer().getPluginManager().registerEvents(new RenewableElytraListener(this), this);
         getServer().getPluginManager().registerEvents(new ChorusListener(this), this);

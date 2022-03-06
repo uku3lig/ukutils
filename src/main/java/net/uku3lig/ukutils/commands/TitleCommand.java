@@ -4,38 +4,48 @@ import net.uku3lig.ukutils.Ukutils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
 
-public record TitleCommand(JavaPlugin plugin) implements CommandExecutor {
+public class TitleCommand extends UkutilsCommand {
     private static final String TITLE_FORMAT = "lp user %s meta setprefix 1000 \"&r[%s&r]\"";
     private static final String REMOVE_TITLE_FORMAT = "lp user %s meta removeprefix 1000";
     private static final String COLOR_PATTERN = "&?#[a-fA-F0-9]{6}|&[a-f0-9k-or]";
 
+    public TitleCommand(Ukutils plugin) {
+        super(plugin);
+    }
+
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        List<String> arguments = Ukutils.parseArgs(args);
-        System.out.println(arguments);
-        if (sender instanceof Player player && arguments.size() < 2) {
-            if (arguments.isEmpty()) resetTitle(sender, player);
+    public String command() {
+        return "title";
+    }
+
+    @Override
+    public Set<String> depends() {
+        return Collections.singleton("LuckPerms");
+    }
+
+    @Override
+    public void onCommandReceived(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (sender instanceof Player player && args.length < 2) {
+            if (args.length == 0) resetTitle(sender, player);
             else {
-                Player target = Bukkit.getPlayerExact(arguments.get(0));
+                Player target = Bukkit.getPlayerExact(args[0]);
                 if (target != null && sender.hasPermission("ukutils.title.others")) resetTitle(sender, target);
-                else changeTitle(sender, player, arguments.get(0));
+                else changeTitle(sender, player, args[0]);
             }
         } else {
-            Player target = Bukkit.getPlayerExact(arguments.get(0));
+            Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null) Ukutils.sendMessage(sender, ChatColor.RED + "Error: cannot find that player");
             else if (!sender.hasPermission("ukutils.title.others"))
                 Ukutils.sendMessage(sender, ChatColor.RED + "Error: cannot change this person's title");
-            else changeTitle(sender, target, arguments.get(1));
+            else changeTitle(sender, target, args[0]);
         }
-        return true;
     }
 
     private void resetTitle(CommandSender sender, Player target) {

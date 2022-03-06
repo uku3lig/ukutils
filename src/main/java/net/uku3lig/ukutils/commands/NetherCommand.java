@@ -5,13 +5,22 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class NetherCommand implements CommandExecutor {
+public class NetherCommand extends UkutilsCommand {
+    public NetherCommand(Ukutils plugin) {
+        super(plugin);
+    }
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public String command() {
+        return "nether";
+    }
+
+    @Override
+    public void onCommandReceived(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender instanceof Player player) {
             Bukkit.getWorlds().stream()
                     .filter(w -> w.getEnvironment().equals(World.Environment.NETHER))
@@ -25,6 +34,5 @@ public class NetherCommand implements CommandExecutor {
                         }
                     }, () -> Ukutils.sendMessage(sender, ChatColor.RED + "Error: could not find nether."));
         } else Ukutils.sendMessage(sender, ChatColor.RED + "Error: you're not a player.");
-        return true;
     }
 }

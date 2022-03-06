@@ -6,19 +6,27 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class EnderchestCommand implements CommandExecutor {
+public class EnderchestCommand extends UkutilsCommand {
+    public EnderchestCommand(Ukutils plugin) {
+        super(plugin);
+    }
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public String command() {
+        return "enderchest";
+    }
+
+    @Override
+    public void onCommandReceived(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender instanceof Player player) {
             if (args.length > 0 && player.hasPermission("ukutils.ec.others"))
                 openEC(player, Bukkit.getPlayerExact(args[0]));
             else openEC(player, player);
         } else Ukutils.sendMessage(sender, ChatColor.RED + "Error: you are not a player.");
-        return true;
     }
 
     private void openEC(Player sender, Player player) {

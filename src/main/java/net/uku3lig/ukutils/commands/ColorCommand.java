@@ -4,18 +4,34 @@ import net.uku3lig.ukutils.Ukutils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class ColorCommand implements CommandExecutor {
+import java.util.Collections;
+import java.util.Set;
+
+public class ColorCommand extends UkutilsCommand {
     private static final String COLORS = "[0-9a-f]";
     private static final String RGB_COLOR = "#[0-9a-fA-F]{6}";
     private static final String COMMAND_FORMAT = "nick %s &%s%1$s";
 
+    public ColorCommand(Ukutils plugin) {
+        super(plugin);
+    }
+
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+    public String command() {
+        return "color";
+    }
+
+    @Override
+    public Set<String> depends() {
+        return Collections.singleton("LuckPerms");
+    }
+
+    @Override
+    public void onCommandReceived(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender instanceof Player player && args.length < 2) {
             if (args.length == 0) resetNick(sender, player);
             else { // reset nick for player or give color
@@ -30,8 +46,6 @@ public class ColorCommand implements CommandExecutor {
                 Ukutils.sendMessage(sender, ChatColor.RED + "Error: cannot change this person's color");
             else changeColor(sender, target, args[1]);
         }
-
-        return true;
     }
 
     private void resetNick(CommandSender sender, Player target) {
